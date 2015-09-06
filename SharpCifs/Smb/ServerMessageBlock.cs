@@ -291,7 +291,7 @@ namespace SharpCifs.Smb
 						{
 							if (Log.Level > 0)
 							{
-								Hexdump.ToHexdump(Console.Error, src, srcIndex, maxLen < 128 ? maxLen + 8 : 
+								Hexdump.ToHexdump(Log, src, srcIndex, maxLen < 128 ? maxLen + 8 : 
 									128);
 							}
 							throw new RuntimeException("zero termination not found");
@@ -308,7 +308,7 @@ namespace SharpCifs.Smb
 						{
 							if (Log.Level > 0)
 							{
-								Hexdump.ToHexdump(Console.Error, src, srcIndex, maxLen < 128 ? maxLen + 8 : 
+								Hexdump.ToHexdump(Log, src, srcIndex, maxLen < 128 ? maxLen + 8 : 
 									128);
 							}
 							throw new RuntimeException("zero termination not found");
@@ -352,7 +352,7 @@ namespace SharpCifs.Smb
 						{
 							if (Log.Level > 0)
 							{
-								Hexdump.ToHexdump(Console.Error, src, srcIndex, maxLen < 128 ? maxLen + 8 : 
+								Hexdump.ToHexdump(Log, src, srcIndex, maxLen < 128 ? maxLen + 8 : 
 									128);
 							}
 							throw new RuntimeException("zero termination not found");
@@ -372,7 +372,7 @@ namespace SharpCifs.Smb
 						{
 							if (Log.Level > 0)
 							{
-								Hexdump.ToHexdump(Console.Error, src, srcIndex, maxLen < 128 ? maxLen + 8 : 
+								Hexdump.ToHexdump(Log, src, srcIndex, maxLen < 128 ? maxLen + 8 : 
 									128);
 							}
 							throw new RuntimeException("zero termination not found");

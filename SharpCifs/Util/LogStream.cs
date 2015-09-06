@@ -65,7 +65,7 @@ namespace SharpCifs.Util
 		{
 			if (_inst == null)
 			{
-                SetInstance(Console.Error);
+                SetInstance(Null);
 			}
 			return _inst;
 		}

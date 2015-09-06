@@ -1,101 +1,92 @@
 using System;
-using System.IO;
-using System.Security.Cryptography;
+using System.Linq;
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
 
 namespace SharpCifs.Util.Sharpen
 {
     public abstract class MessageDigest
-	{
-	    public void Digest (byte[] buffer, int o, int len)
-		{
-			byte[] d = Digest ();
-			d.CopyTo (buffer, o);
-		}
+    {
+        public void Digest(byte[] buffer, int o, int len)
+        {
+            byte[] d = Digest();
+            d.CopyTo(buffer, o);
+        }
 
-		public byte[] Digest (byte[] buffer)
-		{
-			Update (buffer);
-			return Digest ();
-		}
+        public byte[] Digest(byte[] buffer)
+        {
+            Update(buffer);
+            return Digest();
+        }
 
-		public abstract byte[] Digest ();
-		public abstract int GetDigestLength ();
-		public static MessageDigest GetInstance (string algorithm)
-		{
-			switch (algorithm.ToLower ()) {
-			case "sha-1":
-				return new MessageDigest<SHA1Managed> ();
-			case "md5":
-				return new MessageDigest<Md5Managed> ();
-			}
-			throw new NotSupportedException (string.Format ("The requested algorithm \"{0}\" is not supported.", algorithm));
-		}
+        public abstract byte[] Digest();
+        public abstract int GetDigestLength();
+        public static MessageDigest GetInstance(string algorithm)
+        {
+            switch (algorithm.ToLower())
+            {
+                case "sha-1":
+                    return new HashMessageDigest(HashAlgorithmNames.Sha1);
+                case "md5":
+                    return new HashMessageDigest(HashAlgorithmNames.Md5);
+            }
+            throw new NotSupportedException(string.Format("The requested algorithm \"{0}\" is not supported.", algorithm));
+        }
 
-		public abstract void Reset ();
-		public abstract void Update (byte[] b);
-		public abstract void Update (byte b);
-		public abstract void Update (byte[] b, int offset, int len);
-	}
+        public abstract void Reset();
+        public abstract void Update(byte[] b);
+        public abstract void Update(byte b);
+        public abstract void Update(byte[] b, int offset, int len);
+    }
 
+    class HashMessageDigest : MessageDigest
+    {
+        HashAlgorithmProvider _provider;
+        CryptographicHash _hash;
 
-	public class MessageDigest<TAlgorithm> : MessageDigest where TAlgorithm : HashAlgorithm, new()
-	{
-		private TAlgorithm _hash;
-		private CryptoStream _stream;
+        public HashMessageDigest(string algorithm)
+        {
+            _provider = HashAlgorithmProvider.OpenAlgorithm(algorithm);
+            Init();
+        }
 
-		public MessageDigest ()
-		{
-			Init ();
-		}
+        public override byte[] Digest()
+        {
+            byte[] hash;
+            CryptographicBuffer.CopyToByteArray(_hash.GetValueAndReset(), out hash);
+            return hash;
+        }
 
-		public override byte[] Digest ()
-		{
-			_stream.FlushFinalBlock ();
-			byte[] hash = _hash.Hash;
-			Reset ();
-			return hash;
-		}
+        public override int GetDigestLength()
+        {
+            return (int)_provider.HashLength;
+        }
 
-		public void Dispose ()
-		{
-			if (_stream != null) {
-				_stream.Dispose ();
-			}
-			_stream = null;
-		}
+        private void Init()
+        {
+            _hash = _provider.CreateHash();
+        }
 
-		public override int GetDigestLength ()
-		{
-			return (_hash.HashSize / 8);
-		}
+        public override void Reset()
+        {
+            Init();
+        }
 
-		private void Init ()
-		{
-			_hash = Activator.CreateInstance<TAlgorithm> ();
-			_stream = new CryptoStream (Stream.Null, _hash, CryptoStreamMode.Write);
-		}
+        public override void Update(byte[] input)
+        {
+            _hash.Append(CryptographicBuffer.CreateFromByteArray(input));
+        }
 
-		public override void Reset ()
-		{
-			Dispose ();
-			Init ();
-		}
+        public override void Update(byte input)
+        {
+            Update(new[] { input });
+        }
 
-		public override void Update (byte[] input)
-		{
-			_stream.Write (input, 0, input.Length);
-		}
-
-		public override void Update (byte input)
-		{
-			_stream.WriteByte (input);
-		}
-
-		public override void Update (byte[] input, int index, int count)
-		{
-			if (count < 0)
-				Console.WriteLine ("Argh!");
-			_stream.Write (input, index, count);
-		}
-	}
+        public override void Update(byte[] input, int index, int count)
+        {
+            if (count < 0)
+                throw new ArgumentException("count < 0!");
+            Update(new ArraySegment<byte>(input, index, count).ToArray());
+        }
+    }
 }

@@ -67,7 +67,7 @@ namespace SharpCifs.Util.Sharpen
 		public bool CreateNewFile ()
 		{
 			try {
-				File.Open (_path, FileMode.CreateNew).Close ();
+				File.Open (_path, FileMode.CreateNew).Dispose();
 				return true;
 			} catch {
 				return false;

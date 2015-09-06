@@ -5,10 +5,6 @@ namespace SharpCifs.Util.Sharpen
 {
     public class InputStreamReader : StreamReader
 	{
-		protected InputStreamReader (string file) : base(file)
-		{
-		}
-
 		public InputStreamReader (InputStream s) : base(s.GetWrappedStream ())
 		{
 		}

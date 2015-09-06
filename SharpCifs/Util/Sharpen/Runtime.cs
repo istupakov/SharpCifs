@@ -120,7 +120,7 @@ namespace SharpCifs.Util.Sharpen
 
 		public static void PrintStackTrace (Exception ex)
 		{
-			Console.WriteLine (ex);
+            LogStream.GetInstance().WriteLine (ex);
 		}
 
 		public static void PrintStackTrace (Exception ex, TextWriter tw)
@@ -148,15 +148,15 @@ namespace SharpCifs.Util.Sharpen
 			return Monitor.Wait (ob, (int)milis);
 		}
 		
-		public static Type GetType (string name)
-		{
-			foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies ()) {
-				Type t = a.GetType (name);
-				if (t != null)
-					return t;
-			}
-			throw new InvalidOperationException ("Type not found: " + name);
-		}
+		//public static Type GetType (string name)
+		//{
+		//	foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies ()) {
+		//		Type t = a.GetType (name);
+		//		if (t != null)
+		//			return t;
+		//	}
+		//	throw new InvalidOperationException ("Type not found: " + name);
+		//}
 		
 		public static void SetCharAt (StringBuilder sb, int index, char c)
 		{

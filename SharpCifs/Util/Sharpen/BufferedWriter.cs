@@ -49,7 +49,7 @@ namespace SharpCifs.Util.Sharpen
 		
 		public void Close ()
 		{
-			_writer.Close ();
+			_writer.Dispose();
 		}
 	}
 }

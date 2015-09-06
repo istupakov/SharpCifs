@@ -207,18 +207,18 @@ namespace SharpCifs.Util.Sharpen
             return (int)tzone.GetUtcOffset(MillisToDateTimeOffset(date, 0).DateTime).TotalMilliseconds;
         }
 
-        public static InputStream GetResourceAsStream(this Type type, string name)
-        {
-            string str2 = type.Assembly.GetName().Name + ".resources";
-            string[] textArray1 = { str2, ".", type.Namespace, ".", name };
-            string str = string.Concat(textArray1);
-            Stream manifestResourceStream = type.Assembly.GetManifestResourceStream(str);
-            if (manifestResourceStream == null)
-            {
-                return null;
-            }
-            return InputStream.Wrap(manifestResourceStream);
-        }
+        //public static InputStream GetResourceAsStream(this Type type, string name)
+        //{
+        //    string str2 = type.Assembly.GetName().Name + ".resources";
+        //    string[] textArray1 = { str2, ".", type.Namespace, ".", name };
+        //    string str = string.Concat(textArray1);
+        //    Stream manifestResourceStream = type.Assembly.GetManifestResourceStream(str);
+        //    if (manifestResourceStream == null)
+        //    {
+        //        return null;
+        //    }
+        //    return InputStream.Wrap(manifestResourceStream);
+        //}
 
         public static long GetTime(this DateTime dateTime)
         {
@@ -227,7 +227,7 @@ namespace SharpCifs.Util.Sharpen
 
         public static void InitCause(this Exception ex, Exception cause)
         {
-            Console.WriteLine(cause);
+            LogStream.GetInstance().WriteLine(cause);
         }
 
         public static bool IsEmpty<T>(this ICollection<T> col)
@@ -567,40 +567,48 @@ namespace SharpCifs.Util.Sharpen
         }
 
 
-        public static string GetTestName(object obj)
-        {
-            return GetTestName();
-        }
+        //public static string GetTestName(object obj)
+        //{
+        //    return GetTestName();
+        //}
 
-        public static string GetTestName()
-        {
-            MethodBase met;
-            int n = 0;
-            do
-            {
-                met = new StackFrame(n).GetMethod();
-                if (met != null)
-                {
-                    foreach (Attribute at in met.GetCustomAttributes(true))
-                    {
-                        if (at.GetType().FullName == "NUnit.Framework.TestAttribute")
-                        {
-                            // Convert back to camel case
-                            string name = met.Name;
-                            if (char.IsUpper(name[0]))
-                                name = char.ToLower(name[0]) + name.Substring(1);
-                            return name;
-                        }
-                    }
-                }
-                n++;
-            } while (met != null);
-            return "";
-        }
+        //public static string GetTestName()
+        //{
+        //    MethodBase met;
+        //    int n = 0;
+        //    do
+        //    {
+        //        met = new StackFrame(n).GetMethod();
+        //        if (met != null)
+        //        {
+        //            foreach (Attribute at in met.GetCustomAttributes(true))
+        //            {
+        //                if (at.GetType().FullName == "NUnit.Framework.TestAttribute")
+        //                {
+        //                    // Convert back to camel case
+        //                    string name = met.Name;
+        //                    if (char.IsUpper(name[0]))
+        //                        name = char.ToLower(name[0]) + name.Substring(1);
+        //                    return name;
+        //                }
+        //            }
+        //        }
+        //        n++;
+        //    } while (met != null);
+        //    return "";
+        //}
 
         public static string GetHostAddress(this IPAddress addr)
         {
             return addr.ToString();
+        }
+
+        public static int GetAddress(this IPAddress addr)
+        {
+            var bytes = addr.GetAddressBytes();
+            if (bytes.Length != 4)
+                throw new NotSupportedException("IPv6 not supported!");
+            return (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | (bytes[3] << 0);
         }
 
 

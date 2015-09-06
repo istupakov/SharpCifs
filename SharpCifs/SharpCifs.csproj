@@ -1,87 +1,117 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5B94D94C-C84D-4BFF-B52C-C490E0EC3406}</ProjectGuid>
-    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectGuid>{366F773D-9BE1-4D16-9BA2-2138AD388AE1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SharpCifs</RootNamespace>
     <AssemblyName>SharpCifs</AssemblyName>
-    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
-    <SilverlightApplication>false</SilverlightApplication>
-    <ValidateXaml>true</ValidateXaml>
-    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
-    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
-    <NoStdLib>true</NoStdLib>
-    <NoConfig>true</NoConfig>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>Bin\Release</OutputPath>
-    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
-    <NoStdLib>true</NoStdLib>
-    <NoConfig>true</NoConfig>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>Bin\x86\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
-    <NoStdLib>true</NoStdLib>
-    <NoConfig>true</NoConfig>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugType>pdbonly</DebugType>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <Optimize>true</Optimize>
-    <OutputPath>Bin\x86\Release</OutputPath>
-    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
-    <NoStdLib>true</NoStdLib>
-    <NoConfig>true</NoConfig>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>Bin\ARM\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
-    <NoStdLib>true</NoStdLib>
-    <NoConfig>true</NoConfig>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
-    <DebugType>pdbonly</DebugType>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <Optimize>true</Optimize>
-    <OutputPath>Bin\ARM\Release</OutputPath>
-    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
-    <NoStdLib>true</NoStdLib>
-    <NoConfig>true</NoConfig>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Dcerpc\DcerpcBind.cs" />
@@ -124,7 +154,6 @@
     <Compile Include="Dcerpc\Rpc.cs" />
     <Compile Include="Dcerpc\UnicodeString.cs" />
     <Compile Include="Dcerpc\UUID.cs" />
-    <Compile Include="Smb\SmbFileExtensions.cs" />
     <Compile Include="Netbios\Lmhosts.cs" />
     <Compile Include="Netbios\Name.cs" />
     <Compile Include="Netbios\NameQueryRequest.cs" />
@@ -205,6 +234,7 @@
     <Compile Include="Smb\SmbConstants.cs" />
     <Compile Include="Smb\SmbException.cs" />
     <Compile Include="Smb\SmbFile.cs" />
+    <Compile Include="Smb\SmbFileExtensions.cs" />
     <Compile Include="Smb\SmbFileFilter.cs" />
     <Compile Include="Smb\SmbFileInputStream.cs" />
     <Compile Include="Smb\SmbFilenameFilter.cs" />
@@ -279,8 +309,6 @@
     <Compile Include="Util\Sharpen\Iterator.cs" />
     <Compile Include="Util\Sharpen\LinkageError.cs" />
     <Compile Include="Util\Sharpen\Matcher.cs" />
-    <Compile Include="Util\Sharpen\MD5.cs" />
-    <Compile Include="Util\Sharpen\MD5Managed.cs" />
     <Compile Include="Util\Sharpen\MessageDigest.cs" />
     <Compile Include="Util\Sharpen\NetworkStream.cs" />
     <Compile Include="Util\Sharpen\ObjectInputStream.cs" />
@@ -300,17 +328,17 @@
     <Compile Include="Util\Sharpen\StringTokenizer.cs" />
     <Compile Include="Util\Sharpen\SynchronizedList.cs" />
     <Compile Include="Util\Sharpen\Thread.cs" />
-    <Compile Include="Util\Sharpen\ThreadFactory.cs" />
-    <Compile Include="Util\Sharpen\ThreadPoolExecutor.cs" />
     <Compile Include="Util\Sharpen\WrappedSystemStream.cs" />
     <Compile Include="Util\Transport\Request.cs" />
     <Compile Include="Util\Transport\Response.cs" />
     <Compile Include="Util\Transport\Transport.cs" />
     <Compile Include="Util\Transport\TransportException.cs" />
+    <Content Include="Properties\SharpCifs.rd.xml" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
-  <ProjectExtensions />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -71,7 +71,7 @@ namespace SharpCifs.Smb
 				return Filename;
 			}
 
-			public virtual int GetType()
+			public new virtual int GetType()
 			{
 				return SmbFile.TypeFilesystem;
 			}

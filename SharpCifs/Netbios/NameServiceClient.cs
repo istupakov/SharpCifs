@@ -213,7 +213,7 @@ namespace SharpCifs.Netbios
             if (_socket == null)
             {
                 _socket = new SocketEx(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                _socket.Bind(new IPEndPoint(laddr.Address, _lport));
+                _socket.Bind(new IPEndPoint(laddr, _lport));
 
                 if (_waitResponse)
                 {
@@ -230,7 +230,7 @@ namespace SharpCifs.Netbios
             {
                 if (_socket != null)
                 {
-                    _socket.Close();
+                    _socket.Dispose();
                     _socket = null;
                 }
                 _thread = null;
@@ -596,7 +596,7 @@ namespace SharpCifs.Netbios
                     IPAddress addr = new IPAddress(addrBytes);
 
                     response = new NodeStatusResponse(new NbtAddress(NbtAddress.UnknownName,
-                        (int)addr.Address, false, 0x20));
+                        addr.GetAddress(), false, 0x20));
                     request = new NodeStatusRequest(new Name(NbtAddress.AnyHostsName, unchecked(0x20), null));
                     request.Addr = addr;
                     Send(request, response, 0);

@@ -8,11 +8,6 @@ namespace SharpCifs.Util.Sharpen
 	{
 		TextWriter _writer;
 		
-		public PrintWriter (FilePath path)
-		{
-			_writer = new StreamWriter (path);
-		}
-
 		public PrintWriter (TextWriter other)
 		{
 			_writer = other;
@@ -21,10 +16,10 @@ namespace SharpCifs.Util.Sharpen
 		public override Encoding Encoding {
 			get { return _writer.Encoding; }
 		}
-		
-		public override void Close ()
-		{
-			_writer.Close ();
+
+        protected override void Dispose(bool disposing)
+        {
+			_writer.Dispose();
 		}
 	
 		public override void Flush ()

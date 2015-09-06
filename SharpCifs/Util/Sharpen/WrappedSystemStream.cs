@@ -28,13 +28,13 @@ namespace SharpCifs.Util.Sharpen
 			get { return _ost; }
 		}
 
-		public override void Close ()
+		protected override void Dispose (bool disposing)
 		{
 			if (_ist != null) {
-				_ist.Close ();
+				_ist.Dispose();
 			}
 			if (_ost != null) {
-				_ost.Close ();
+				_ost.Dispose();
 			}
 		}
 

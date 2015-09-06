@@ -29,7 +29,7 @@ namespace SharpCifs.Util.Sharpen
 	    public virtual void Close ()
 		{
 			if (Wrapped != null) {
-				Wrapped.Close ();
+				Wrapped.Dispose ();
 			}
 		}
 

@@ -9,7 +9,7 @@ namespace SharpCifs.Util.Sharpen
 		private bool _interrupted;
 		private IRunnable _runnable;
 		private ThreadGroup _tgroup;
-		private System.Threading.Thread _thread;
+		private System.Threading.Tasks.Task _thread;
 		
 		[ThreadStatic]
 		private static Thread _wrapperThread;
@@ -32,33 +32,19 @@ namespace SharpCifs.Util.Sharpen
 		
 		Thread (IRunnable runnable, ThreadGroup grp, string name)
 		{
-			_thread = new System.Threading.Thread (InternalRun);
+			_thread = new System.Threading.Tasks.Task(InternalRun);
 			
 			this._runnable = runnable ?? this;
 			_tgroup = grp ?? _defaultGroup;
-			_tgroup.Add (this);
-			if (name != null)
-				_thread.Name = name;
-		}
-
-		private Thread (System.Threading.Thread t)
-		{
-			_thread = t;
-			_tgroup = _defaultGroup;
 			_tgroup.Add (this);
 		}
 
 		public static Thread CurrentThread ()
 		{
-			if (_wrapperThread == null) {
-				_wrapperThread = new Thread (System.Threading.Thread.CurrentThread);
+            if (_wrapperThread == null) {
+				_wrapperThread = new Thread ();
 			}
 			return _wrapperThread;
-		}
-
-		public string GetName ()
-		{
-			return _thread.Name;
 		}
 
 		public ThreadGroup GetThreadGroup ()
@@ -72,83 +58,73 @@ namespace SharpCifs.Util.Sharpen
 			try {
 				_runnable.Run ();
 			} catch (Exception exception) {
-				Console.WriteLine (exception);
+				LogStream.GetInstance().WriteLine (exception);
 			} finally {
 				_tgroup.Remove (this);
 			}
 		}
-		
-		public static void Yield ()
-		{
-		}
 
-		public void Interrupt ()
-		{
-			lock (_thread) {
-				_interrupted = true;
-				//thread.Interrupt ();
+        //public static void Yield ()
+        //{
+        //}
 
-                _thread.Abort();
-			}
-		}
+        //public void Interrupt ()
+        //{
+        //	lock (_thread) {
+        //		_interrupted = true;
+        //		//thread.Interrupt ();
 
-		public static bool Interrupted ()
-		{
-			if (Thread._wrapperThread == null) {
-				return false;
-			}
-			Thread wrapperThread = Thread._wrapperThread;
-			lock (wrapperThread) {
-				bool interrupted = Thread._wrapperThread._interrupted;
-				Thread._wrapperThread._interrupted = false;
-				return interrupted;
-			}
-		}
+        //              _thread.Abort();
+        //	}
+        //}
 
-		public bool IsAlive ()
-		{
-			return _thread.IsAlive;
-		}
+        //public static bool Interrupted ()
+        //{
+        //	if (Thread._wrapperThread == null) {
+        //		return false;
+        //	}
+        //	Thread wrapperThread = Thread._wrapperThread;
+        //	lock (wrapperThread) {
+        //		bool interrupted = Thread._wrapperThread._interrupted;
+        //		Thread._wrapperThread._interrupted = false;
+        //		return interrupted;
+        //	}
+        //}
 
-		public void Join ()
-		{
-			_thread.Join ();
-		}
+        //public void Join ()
+        //{
+        //	_thread.Join ();
+        //}
 
-		public void Join (long timeout)
-		{
-			_thread.Join ((int)timeout);
-		}
+        //public void Join (long timeout)
+        //{
+        //	_thread.Join ((int)timeout);
+        //}
 
-		public virtual void Run ()
+        //public void Abort ()
+        //{
+        //	_thread.Abort ();
+        //}
+
+        public virtual void Run ()
 		{
 		}
 
 		public void SetDaemon (bool daemon)
 		{
-			_thread.IsBackground = daemon;
-		}
-
-		public void SetName (string name)
-		{
-			_thread.Name = name;
+			//_thread.IsBackground = daemon;
 		}
 
 		public static void Sleep (long milis)
 		{
-			System.Threading.Thread.Sleep ((int)milis);
+            System.Threading.Tasks.Task.Delay((int)milis).Wait();
+			//System.Threading.Thread.Sleep ((int)milis);
 		}
 
 		public void Start ()
 		{
 			_thread.Start ();
-		}
-		
-		public void Abort ()
-		{
-			_thread.Abort ();
-		}
-		
+		}	
 	}
 
 	public class ThreadGroup

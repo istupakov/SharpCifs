@@ -351,7 +351,7 @@ namespace SharpCifs.Util
 			int length = clearText.Length;
 			if (length % 8 != 0)
 			{
-				Console.Out.WriteLine("Array must be a multiple of 8");
+                LogStream.GetInstance().WriteLine("Array must be a multiple of 8");
 				return null;
 			}
 			byte[] cipherText = new byte[length];
@@ -369,7 +369,7 @@ namespace SharpCifs.Util
 			int length = cipherText.Length;
 			if (length % 8 != 0)
 			{
-				Console.Out.WriteLine("Array must be a multiple of 8");
+                LogStream.GetInstance().WriteLine("Array must be a multiple of 8");
 				return null;
 			}
 			byte[] clearText = new byte[length];

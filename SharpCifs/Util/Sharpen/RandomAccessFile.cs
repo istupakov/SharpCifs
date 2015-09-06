@@ -21,7 +21,7 @@ namespace SharpCifs.Util.Sharpen
 
 		public void Close ()
 		{
-			_stream.Close ();
+			_stream.Dispose ();
 		}
 
 		public long GetFilePointer ()

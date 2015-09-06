@@ -280,7 +280,7 @@ namespace SharpCifs.Smb
                 {
                     try
                     {
-                        Socket.Close();
+                        Socket.Dispose();
                     }
                     catch (IOException)
                     {
@@ -306,7 +306,7 @@ namespace SharpCifs.Smb
                                 case NbtException.CalledNotPresent:
                                 case NbtException.NotListeningCalled:
                                     {
-                                        Socket.Close();
+                                        Socket.Dispose();
                                         break;
                                     }
 
@@ -487,7 +487,7 @@ namespace SharpCifs.Smb
 
                 Out.Close();
                 In.Close();
-                Socket.Close();
+                Socket.Dispose();
             }
             finally
             {
